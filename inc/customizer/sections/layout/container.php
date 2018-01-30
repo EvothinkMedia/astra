@@ -145,3 +145,26 @@ if ( ! defined( 'ABSPATH' ) ) {
 			)
 		)
 	);
+
+	/**
+	 * Option: Body Background Image
+	 */
+	$wp_customize->add_setting(
+		ASTRA_THEME_SETTINGS . '[site-layout-outside-bg-img]', array(
+			'default'           => astra_get_option( 'site-layout-outside-bg-img' ),
+			'type'              => 'option',
+			'sanitize_callback' => 'esc_url_raw',
+		)
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Image_Control(
+			$wp_customize, ASTRA_THEME_SETTINGS . '[site-layout-outside-bg-img]', array(
+				'section'  => 'section-colors-body',
+				'priority' => 25,
+				'label'          => __( 'Background Image', 'astra' ),
+				'library_filter' => array( 'gif', 'jpg', 'jpeg', 'png' ),
+			)
+		)
+	);
+

@@ -65,6 +65,7 @@ if ( ! class_exists( 'Astra_Dynamic_CSS' ) ) {
 
 			// Site Background Color.
 			$box_bg_color = astra_get_option( 'site-layout-outside-bg-color' );
+			$box_bg_img = astra_get_option( 'site-layout-outside-bg-img' );
 
 			// Color Options.
 			$text_color       = astra_get_option( 'text-color' );
@@ -440,11 +441,9 @@ if ( ! class_exists( 'Astra_Dynamic_CSS' ) ) {
 			$parse_css .= astra_parse_css( $page_builder_comment, '545' );
 
 			$separate_container_css = array(
-				'body, .ast-separate-container' => array(
-					'background-color' => esc_attr( $box_bg_color ),
-				),
+				'body, .ast-separate-container' => astra_get_bg_img_and_color( $box_bg_color, $box_bg_img )
 			);
-			$parse_css             .= astra_parse_css( $separate_container_css );
+			$parse_css .= astra_parse_css( $separate_container_css );
 
 			$tablet_typo = array();
 

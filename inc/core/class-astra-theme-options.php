@@ -149,6 +149,7 @@ if ( ! class_exists( 'Astra_Theme_Options' ) ) {
 					'site-layout'                     => 'ast-full-width-layout',
 					'site-content-width'              => 1200,
 					'site-layout-outside-bg-color'    => '',
+					'site-layout-outside-bg-img'      => '',
 					// Container.
 					'site-content-layout'             => 'content-boxed-container',
 					'single-page-content-layout'      => 'default',

@@ -888,3 +888,46 @@ if ( ! function_exists( 'astra_adjust_brightness' ) ) {
 	}
 }// End if().
 
+
+/**
+ * Get CSS value
+ */
+if ( ! function_exists( 'astra_get_bg_img_and_color' ) ) {
+
+	/**
+	 * Get CSS value
+	 *
+	 * Syntax:
+	 *
+	 *  astra_get_css_value( VALUE, UNIT );
+	 *
+	 * E.g.
+	 *
+	 *  astra_get_bg_img_and_color( VALUE, 'url' );
+	 *
+	 * @param  string $bg_color 	CSS value.
+	 * @param  string $bg_img 		CSS unit.
+	 *
+	 * @return string mixed 		Generated CSS depends on value.
+	 */
+	function astra_get_bg_img_and_color( $bg_color = '', $bg_img = '' ) {
+
+		// if ( '' == $value && '' == $default ) {
+		// 	return $value;
+		// }
+
+		$gen_css = '';
+
+		if ( '' !== $bg_img && '' !== $bg_color) {
+			$gen_css = array(
+				'background-image' => 'linear-gradient(to right, ' . esc_attr( $bg_color ) . ', ' . esc_attr( $bg_color ) . '), url(' . esc_url( $bg_img ) . ')'
+			);
+		}elseif ( '' !== $bg_img ) {
+			$gen_css = array( 'background-image' => 'url(' . esc_url( $bg_img ) . ')' );
+		}elseif ( '' !== $bg_color ) {
+			$gen_css = array( 'background-color' => esc_attr( $bg_color ) );
+		}
+
+		return $gen_css;
+	}
+}// End if().
