@@ -115,6 +115,7 @@ if ( ! class_exists( 'Astra_Customizer' ) ) {
 			$wp_customize->register_control_type( 'Astra_Control_Divider' );
 			$wp_customize->register_control_type( 'Astra_Control_Color' );
 			$wp_customize->register_control_type( 'Astra_Control_Description' );
+			$wp_customize->register_control_type( 'Astra_Control_Background' );
 
 			/**
 			 * Helper files
@@ -190,6 +191,13 @@ if ( ! class_exists( 'Astra_Customizer' ) ) {
 				$js_prefix  = '.js';
 				$css_prefix = '.css';
 				$dir        = 'unminified';
+			}
+
+			if ( is_rtl() ) {
+				$css_prefix = '-rtl.min.css';
+				if ( SCRIPT_DEBUG ) {
+					$css_prefix = '-rtl.css';
+				}
 			}
 
 			// Customizer Core.
@@ -333,7 +341,7 @@ if ( ! class_exists( 'Astra_Customizer' ) ) {
 			}
 		}
 	}
-}// End if().
+}
 
 /**
  *  Kicking this off by calling 'get_instance()' method

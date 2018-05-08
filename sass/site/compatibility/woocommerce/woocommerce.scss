@@ -941,11 +941,13 @@ p.demo_store,
 		}
 
 		form.cart {
-			display: flex;
-			align-items: center;
-			flex-wrap: wrap;
 			margin: 0 0 1.2em;
 
+			.ast-woo-single-cart-button-wrap{
+				display: flex;
+				align-items: center;
+				flex-wrap: wrap;
+			}
 			@include clearfix();
 
 			div.quantity {
@@ -2235,6 +2237,16 @@ p.demo_store,
 					color: $red;
 				}
 			}
+		}
+	}
+
+	/**
+	 * Product Saerch Widget
+	 */
+	.widget_product_search {
+		button{
+			flex: 0 0 auto;
+			padding: 10px 20px;
 		}
 	}
 
@@ -3716,6 +3728,24 @@ button.pswp__button--zoom:hover {
 		.checkout.wc-forward {
 			margin-left: 5px;
 			margin-right: 0;
+		}
+	}
+
+	/* Product Tag Cloud */
+	&.widget_product_tag_cloud {
+		.tagcloud {
+			margin-top: 10px;
+			display: inline-block;
+			a {
+				border: 1px solid $color-border-dotted-widget;
+				padding: 0.5em 0.9em;
+				display: inline-block;
+				margin-bottom: 4px;
+				font-size: 14px;
+				margin-right: 4px;
+				line-height: 1.5;
+				@include ast-transition();    
+			}
 		}
 	}
 

@@ -129,24 +129,57 @@ if ( ! defined( 'ABSPATH' ) ) {
 		)
 	);
 
+	// Learn More link if Astra Pro is not activated.
+	if ( ! defined( 'ASTRA_EXT_VER' ) ) {
+
+		/**
+		 * Option: Divider
+		 */
+		$wp_customize->add_control(
+			new Astra_Control_Divider(
+				$wp_customize, ASTRA_THEME_SETTINGS . '[ast-container-more-feature-divider]', array(
+					'type'     => 'ast-divider',
+					'section'  => 'section-container-layout',
+					'priority' => 70,
+					'settings' => array(),
+				)
+			)
+		);
+		/**
+		 * Option: Learn More about Container
+		 */
+		$wp_customize->add_control(
+			new Astra_Control_Description(
+				$wp_customize, ASTRA_THEME_SETTINGS . '[ast-container-more-feature-description]', array(
+					'type'     => 'ast-description',
+					'section'  => 'section-container-layout',
+					'priority' => 70,
+					'label'    => '',
+					'help'     => '<p>' . __( 'More Options Available for Container in Astra Pro!', 'astra' ) . '</p><a href="' . astra_get_pro_url( 'https://wpastra.com/docs/site-layout-overview/', 'customizer', 'learn-more', 'upgrade-to-pro' ) . '" class="button button-primary"  target="_blank" rel="noopener">' . __( 'Learn More', 'astra' ) . '</a>',
+					'settings' => array(),
+				)
+			)
+		);
+	}
+
 	/**
-	 * Option: Body Background Color
+	 * Option: Body Background
 	 */
 	$wp_customize->add_setting(
-		ASTRA_THEME_SETTINGS . '[site-layout-outside-bg-color]', array(
-			'default'           => '',
+		ASTRA_THEME_SETTINGS . '[site-layout-outside-bg-obj]', array(
+			'default'           => astra_get_option( 'site-layout-outside-bg-obj' ),
 			'type'              => 'option',
 			'transport'         => 'postMessage',
-			'sanitize_callback' => array( 'Astra_Customizer_Sanitizes', 'sanitize_alpha_color' ),
+			'sanitize_callback' => array( 'Astra_Customizer_Sanitizes', 'sanitize_background_obj' ),
 		)
 	);
 	$wp_customize->add_control(
-		new Astra_Control_Color(
-			$wp_customize, ASTRA_THEME_SETTINGS . '[site-layout-outside-bg-color]', array(
-				'type'     => 'ast-color',
+		new Astra_Control_Background(
+			$wp_customize, ASTRA_THEME_SETTINGS . '[site-layout-outside-bg-obj]', array(
+				'type'     => 'ast-background',
 				'section'  => 'section-colors-body',
-				'priority' => 70,
-				'label'    => __( 'Background Color', 'astra' ),
+				'priority' => 25,
+				'label'    => __( 'Background', 'astra' ),
 			)
 		)
 	);

@@ -65,14 +65,14 @@ if ( ! function_exists( 'astra_get_post_meta' ) ) {
 				default:
 					$output_str = apply_filters( 'astra_meta_case_' . $meta_value, $output_str, $loop_count, $separator );
 
-			}// End switch().
+			}
 
 			$loop_count ++;
-		}// End foreach().
+		}
 
 		return $output_str;
 	}
-}// End if().
+}
 
 /**
  * Function to get Date of Post
@@ -107,7 +107,7 @@ if ( ! function_exists( 'astra_post_date' ) ) {
 		$output       .= '</span>';
 		return apply_filters( 'astra_post_date', $output );
 	}
-}// End if().
+}
 
 /**
  * Function to get Author of Post
@@ -218,7 +218,7 @@ if ( ! function_exists( 'astra_post_comments' ) ) {
 
 		return apply_filters( 'astra_post_comments', $output, $output_filter );
 	}
-}// End if().
+}
 
 /**
  * Function to get Tags applied of Post
@@ -374,8 +374,8 @@ if ( ! function_exists( 'astra_get_blog_layout_class' ) ) {
 						$classes[] = 'ast-no-thumb';
 					}
 					break;
-			}// End switch().
-		}// End if().
+			}
+		}
 
 		if ( ! empty( $class ) ) {
 			if ( ! is_array( $class ) ) {
@@ -396,4 +396,41 @@ if ( ! function_exists( 'astra_get_blog_layout_class' ) ) {
 
 		return array_unique( $classes );
 	}
-}// End if().
+}
+
+/**
+ * Function to get Content Read More Link of Post
+ *
+ * @since 1.2.7
+ * @return html
+ */
+if ( ! function_exists( 'astra_the_content_more_link' ) ) {
+
+	/**
+	 * Filters the Read More link text.
+	 *
+	 * @param  string $more_link_element Read More link element.
+	 * @param  string $more_link_text Read More text.
+	 * @return html                Markup.
+	 */
+	function astra_the_content_more_link( $more_link_element = '', $more_link_text = '' ) {
+
+		$enabled = apply_filters( 'astra_the_content_more_link_enabled', '__return_true' );
+		if ( ( is_admin() && ! wp_doing_ajax() ) || ! $enabled ) {
+			return $more_link_element;
+		}
+
+		$more_link_text    = apply_filters( 'astra_the_content_more_string', __( 'Read More &raquo;', 'astra' ) );
+		$read_more_classes = apply_filters( 'astra_the_content_more_link_class', array() );
+
+		$post_link = sprintf(
+			esc_html( '%s' ),
+			'<a class="' . implode( ' ', $read_more_classes ) . '" href="' . esc_url( get_permalink() ) . '"> ' . the_title( '<span class="screen-reader-text">', '</span>', false ) . $more_link_text . '</a>'
+		);
+
+		$more_link_element = ' &hellip;<p class="ast-the-content-more-link"> ' . $post_link . '</p>';
+
+		return apply_filters( 'astra_the_content_more_link', $more_link_element, $more_link_text );
+	}
+}
+add_filter( 'the_content_more_link', 'astra_the_content_more_link', 10, 2 );
